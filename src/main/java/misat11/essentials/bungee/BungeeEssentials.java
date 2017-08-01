@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
 
+import misat11.essentials.bungee.commands.MsgCommand;
 import misat11.essentials.bungee.listeners.ChatListener;
 import net.md_5.bungee.api.plugin.Plugin;
 import net.md_5.bungee.config.Configuration;
@@ -12,7 +13,7 @@ import net.md_5.bungee.config.ConfigurationProvider;
 import net.md_5.bungee.config.YamlConfiguration;
 
 public class BungeeEssentials extends Plugin {
-	public static String version = "0.0.1";
+	public static String version = "0.0.2";
 	public static boolean snapshot = true;
 	private static BungeeEssentials instance;
 	private static Configuration config;
@@ -20,29 +21,40 @@ public class BungeeEssentials extends Plugin {
 	@Override
 	public void onEnable() {
 		instance = this;
-        if (!getDataFolder().exists())
-            getDataFolder().mkdir();
 
-        File file = new File(getDataFolder(), "config.yml");
+		/* Configs */
+		if (!getDataFolder().exists())
+			getDataFolder().mkdir();
 
-     
-        if (!file.exists()) {
-            try {
-            	InputStream in = getResourceAsStream("config.yml");
-                Files.copy(in, file.toPath());
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-        
-        try {
-			config = ConfigurationProvider.getProvider(YamlConfiguration.class).load(new File(getDataFolder(), "config.yml"));
-		} catch (IOException e) { 
+		File file = new File(getDataFolder(), "config.yml");
+
+		if (!file.exists()) {
+			try {
+				InputStream in = getResourceAsStream("config.yml");
+				Files.copy(in, file.toPath());
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+
+		try {
+			config = ConfigurationProvider.getProvider(YamlConfiguration.class)
+					.load(new File(getDataFolder(), "config.yml"));
+			if (!config.contains("chat"))
+				config.set("chat", "[%server%] %name% >> %chat%");
+			if (!config.contains("msg"))
+				config.set("msg", "%sender_name% >> %receiver_name%: %chat%");
+			ConfigurationProvider.getProvider(YamlConfiguration.class).save(config,
+					new File(getDataFolder(), "config.yml"));
+		} catch (IOException e) {
 			e.printStackTrace();
 		}
-        
-        getProxy().getPluginManager().registerListener(this, new ChatListener());
 
+		/* Listeners */
+		getProxy().getPluginManager().registerListener(this, new ChatListener());
+
+		/* Commands */
+		getProxy().getPluginManager().registerCommand(this, new MsgCommand());
 
 		getLogger().info("********************");
 		getLogger().info("*   Bungee Perms   *");
@@ -76,8 +88,8 @@ public class BungeeEssentials extends Plugin {
 	public static BungeeEssentials getInstance() {
 		return instance;
 	}
-	
-	public static Configuration getConfig(){
+
+	public static Configuration getConfig() {
 		return config;
 	}
 
