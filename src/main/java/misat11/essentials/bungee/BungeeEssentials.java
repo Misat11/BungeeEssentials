@@ -13,7 +13,7 @@ import net.md_5.bungee.config.ConfigurationProvider;
 import net.md_5.bungee.config.YamlConfiguration;
 
 public class BungeeEssentials extends Plugin {
-	public static String version = "0.0.2";
+	public static String version = "0.0.3";
 	public static boolean snapshot = true;
 	private static BungeeEssentials instance;
 	private static Configuration config;
@@ -57,7 +57,7 @@ public class BungeeEssentials extends Plugin {
 		getProxy().getPluginManager().registerCommand(this, new MsgCommand());
 
 		getLogger().info("********************");
-		getLogger().info("*   Bungee Perms   *");
+		getLogger().info("* BungeeEssentials *");
 		getLogger().info("*    by Misat11    *");
 		getLogger().info("*                  *");
 		if (version.length() == 10) {
@@ -81,7 +81,7 @@ public class BungeeEssentials extends Plugin {
 	public void onDisable() {
 		getLogger().info("********************");
 		getLogger().info("* Thanks for using *");
-		getLogger().info("*   Bungee Perms   *");
+		getLogger().info("* BungeeEssentials *");
 		getLogger().info("********************");
 	}
 

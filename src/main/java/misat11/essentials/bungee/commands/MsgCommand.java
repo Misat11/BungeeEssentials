@@ -15,7 +15,7 @@ public class MsgCommand extends Command {
 	}
 
 	@Override
-	public void execute(CommandSender sender, String[] args) {
+	public void execute(CommandSender sender, String[] args) { 
 		if (sender instanceof ProxiedPlayer) {
 			if (args.length >= 2) {
 				if (ProxyServer.getInstance().getPlayer(args[0]) != null) {
@@ -29,7 +29,9 @@ public class MsgCommand extends Command {
 							.replace("%receiver_name%", receiver.getName())
 							.replace("%receiver_displayname%", receiver.getDisplayName())
 							.replace("%receiver_server%", receiver.getServer().getInfo().getName())
-							.replace("%receiver_server_motd%", receiver.getServer().getInfo().getMotd()));
+							.replace("%receiver_server_motd%", receiver.getServer().getInfo().getMotd())
+							.replaceAll("&", "§")
+							);
 					sender.sendMessage(sended_message);
 					receiver.sendMessage(sended_message);
 				} else {
