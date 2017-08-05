@@ -1,6 +1,7 @@
 package misat11.essentials.bungee.listeners; 
 
 import misat11.essentials.bungee.BungeeEssentials;
+import misat11.essentials.bungee.UserConfig;
 import net.md_5.bungee.api.ProxyServer;
 import net.md_5.bungee.api.chat.BaseComponent;
 import net.md_5.bungee.api.chat.TextComponent;
@@ -20,6 +21,7 @@ public class ChatListener implements Listener {
 				.replace("%chat%", e.getMessage())
 				.replace("%name%", player.getName())
 				.replace("%displayname%", player.getDisplayName())
+				.replace("%customname%", UserConfig.getPlayer(player).getCustomname())
 				.replace("%server%", player.getServer().getInfo().getName())
 				.replace("%server_motd%", player.getServer().getInfo().getMotd())
 				.replaceAll("&", "§")
