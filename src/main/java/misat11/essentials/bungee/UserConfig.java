@@ -15,7 +15,6 @@ import net.md_5.bungee.config.YamlConfiguration;
 public class UserConfig {
 
 	private String playername;
-	private String customname = null;
 	private Configuration config;
 
 	private boolean init = false;
@@ -76,11 +75,17 @@ public class UserConfig {
 
 	public void clearMails() {
 		config.set("mails", null);
+		try {
+			ConfigurationProvider.getProvider(YamlConfiguration.class).save(config,
+					new File(getDataFolder(), playername.toLowerCase() + ".yml"));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 	public String getCustomname(boolean wprefix) {
-		if (customname != null) {
-			return (wprefix == true ? BungeeEssentials.getConfig().getString("customnameprefix") : "") + customname;
+		if (config.contains("customname")) {
+			return (wprefix == true ? BungeeEssentials.getConfig().getString("customnameprefix") : "") + config.getString("customname");
 		} else {
 			return playername;
 		}
@@ -114,21 +119,15 @@ public class UserConfig {
 			e.printStackTrace();
 		}
 
-		if (config.contains("customname")) {
-			customname = config.getString("customnick");
-		}
-
 		init = true;
 	}
 
 	public void configReload() {
-		init = false;
-		customname = null;
+		init = false; 
 		configInit();
 	}
 
-	public void setCustomname(String customname) {
-		this.customname = customname;
+	public void setCustomname(String customname) { 
 		try {
 			config.set("customname", customname);
 			ConfigurationProvider.getProvider(YamlConfiguration.class).save(config,
