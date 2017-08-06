@@ -12,7 +12,7 @@ import net.md_5.bungee.api.plugin.Command;
 public class MsgCommand extends Command {
 
 	public MsgCommand() {
-		super("msg");
+		super("msg", null, "tell", "message", "w", "whisper");
 	}
 
 	@Override

@@ -2,7 +2,9 @@ package misat11.essentials.bungee;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import net.md_5.bungee.api.ProxyServer;
 import net.md_5.bungee.api.connection.ProxiedPlayer;
@@ -12,36 +14,75 @@ import net.md_5.bungee.config.YamlConfiguration;
 
 public class UserConfig {
 
-	private ProxiedPlayer player;
+	private String playername;
 	private String customname = null;
 	private Configuration config;
 
 	private boolean init = false;
 
-	private static HashMap<ProxiedPlayer, UserConfig> userConfigs = new HashMap<ProxiedPlayer, UserConfig>();
+	private static HashMap<String, UserConfig> userConfigs = new HashMap<String, UserConfig>();
 
-	public UserConfig(String username) {
-		this(ProxyServer.getInstance().getPlayer(username));
+	public static void registerPlayer(ProxiedPlayer player) {
+		registerPlayer(player.getName());
 	}
 
-	public UserConfig(ProxiedPlayer player) {
-		this.player = player;
-		userConfigs.put(player, this);
+	public static void registerPlayer(String username) {
+		if (!userConfigs.containsKey(username.toLowerCase())) {
+			UserConfig user = new UserConfig();
+			user.setName(username);
+			userConfigs.put(username.toLowerCase(), user);
+			user.configInit();
+		} else {
+			userConfigs.get(username.toLowerCase()).setName(username);
+		}
+	}
+
+	private UserConfig() {
+
 	}
 
 	public String getName() {
-		return player.getName();
+		return playername;
+	}
+
+	private void setName(String username) {
+		this.playername = username;
 	}
 
 	public String getCustomname() {
 		return this.getCustomname(true);
 	}
 
+	public void sendMail(ProxiedPlayer sender, String mail) {
+		if (!config.contains("mails"))
+			config.set("mails", new ArrayList<HashMap>());
+		HashMap<String, String> save = new HashMap<String, String>();
+		save.put("sender", sender.getName());
+		save.put("message", mail);
+		List list = config.getList("mails");
+		list.add(save);
+		config.set("mails", list);
+		try {
+			ConfigurationProvider.getProvider(YamlConfiguration.class).save(config,
+					new File(getDataFolder(), playername.toLowerCase() + ".yml"));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public List getMails() {
+		return config.contains("mails") ? config.getList("mails") : null;
+	}
+
+	public void clearMails() {
+		config.set("mails", null);
+	}
+
 	public String getCustomname(boolean wprefix) {
 		if (customname != null) {
 			return (wprefix == true ? BungeeEssentials.getConfig().getString("customnameprefix") : "") + customname;
 		} else {
-			return player.getName();
+			return playername;
 		}
 	}
 
@@ -56,7 +97,7 @@ public class UserConfig {
 		if (!getDataFolder().exists())
 			getDataFolder().mkdir();
 
-		File file = new File(getDataFolder(), player.getName().toLowerCase() + ".yml");
+		File file = new File(getDataFolder(), playername.toLowerCase() + ".yml");
 
 		if (!file.exists()) {
 			try {
@@ -68,7 +109,7 @@ public class UserConfig {
 
 		try {
 			config = ConfigurationProvider.getProvider(YamlConfiguration.class)
-					.load(new File(getDataFolder(), player.getName().toLowerCase() + ".yml"));
+					.load(new File(getDataFolder(), playername.toLowerCase() + ".yml"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -91,21 +132,22 @@ public class UserConfig {
 		try {
 			config.set("customname", customname);
 			ConfigurationProvider.getProvider(YamlConfiguration.class).save(config,
-					new File(getDataFolder(), player.getName().toLowerCase() + ".yml"));
+					new File(getDataFolder(), playername.toLowerCase() + ".yml"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
 
 	public static UserConfig getPlayer(String username) {
-		return getPlayer(ProxyServer.getInstance().getPlayer(username));
-	}
-
-	public static UserConfig getPlayer(ProxiedPlayer player) {
-		if (userConfigs.containsKey(player)) {
-			return userConfigs.get(player);
+		username = username.toLowerCase();
+		if (userConfigs.containsKey(username)) {
+			return userConfigs.get(username);
 		} else {
 			return null;
 		}
+	}
+
+	public static UserConfig getPlayer(ProxiedPlayer player) {
+		return getPlayer(player.getName());
 	}
 }
