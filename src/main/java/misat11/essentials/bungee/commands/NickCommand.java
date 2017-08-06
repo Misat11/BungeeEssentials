@@ -26,7 +26,7 @@ public class NickCommand extends Command {
 					sender.sendMessage(new TextComponent("Your nick was reseted"));
 				} else {
 					config.setCustomname(args[0]);
-					sender.sendMessage(new TextComponent("Your nick was changed to " + args[0]));
+					sender.sendMessage(new TextComponent("Your nick was changed to " + args[0].replaceAll("&", "§")));
 				}
 			} else {
 				sender.sendMessage(new TextComponent("Cannot be used from console!"));
@@ -42,7 +42,7 @@ public class NickCommand extends Command {
 						sender.sendMessage(new TextComponent("Custom nick of " + args[0] + " was reseted"));
 					} else {
 						config.setCustomname(args[1]);
-						sender.sendMessage(new TextComponent("Custom nick of " + args[0] + " was changed to " + args[1]));
+						sender.sendMessage(new TextComponent("Custom nick of " + args[0] + " was changed to " + args[1].replaceAll("&", "§")));
 					}
 				} else {
 					sender.sendMessage(new TextComponent("Player is offline or not exists!"));

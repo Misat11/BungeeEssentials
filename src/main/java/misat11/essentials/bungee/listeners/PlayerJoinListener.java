@@ -5,6 +5,8 @@ import java.util.function.Consumer;
 
 import misat11.essentials.bungee.BungeeEssentials;
 import misat11.essentials.bungee.UserConfig;
+import misat11.essentials.bungee.utils.BungeePermsData;
+import misat11.essentials.bungee.utils.LuckPermsData;
 import net.md_5.bungee.api.ProxyServer;
 import net.md_5.bungee.api.chat.BaseComponent;
 import net.md_5.bungee.api.chat.TextComponent;
@@ -36,6 +38,12 @@ public class PlayerJoinListener implements Listener {
 				.replace("%name%", e.getPlayer().getName())
 				.replace("%displayname%", e.getPlayer().getDisplayName())
 				.replace("%customname%", UserConfig.getPlayer(e.getPlayer()).getCustomname()) 
+				.replace("%BungeePerms_prefix%", BungeePermsData.getPrefix(e.getPlayer()))
+				.replace("%BungeePerms_suffix%", BungeePermsData.getSuffix(e.getPlayer()))
+				.replace("%BungeePerms_group%", BungeePermsData.getGroup(e.getPlayer()))
+				.replace("%LuckPerms_prefix%", LuckPermsData.getPrefix(e.getPlayer()))
+				.replace("%LuckPerms_suffix%", LuckPermsData.getSuffix(e.getPlayer())) 
+				.replace("%LuckPerms_group%", LuckPermsData.getPrimaryGroup(e.getPlayer())) 
 				.replaceAll("&", "§")
 				);
 		ProxyServer.getInstance().broadcast(message);

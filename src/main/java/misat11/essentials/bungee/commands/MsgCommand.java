@@ -2,6 +2,8 @@ package misat11.essentials.bungee.commands;
 
 import misat11.essentials.bungee.BungeeEssentials;
 import misat11.essentials.bungee.UserConfig;
+import misat11.essentials.bungee.utils.BungeePermsData;
+import misat11.essentials.bungee.utils.LuckPermsData;
 import net.md_5.bungee.api.CommandSender;
 import net.md_5.bungee.api.ProxyServer;
 import net.md_5.bungee.api.chat.BaseComponent;
@@ -37,11 +39,23 @@ public class MsgCommand extends Command {
 							.replace("%sender_server_motd%", ((ProxiedPlayer) sender).getServer().getInfo().getMotd())
 							.replace("%sender_customname%",
 									UserConfig.getPlayer((ProxiedPlayer) sender).getCustomname())
+							.replace("%sender_BungeePerms_prefix%", BungeePermsData.getPrefix((ProxiedPlayer) sender))
+							.replace("%sender_BungeePerms_suffix%", BungeePermsData.getSuffix((ProxiedPlayer) sender))
+							.replace("%sender_BungeePerms_group%", BungeePermsData.getGroup((ProxiedPlayer) sender))
+							.replace("%sender_LuckPerms_prefix%", LuckPermsData.getPrefix((ProxiedPlayer) sender))
+							.replace("%sender_LuckPerms_suffix%", LuckPermsData.getSuffix((ProxiedPlayer) sender)) 
+							.replace("%sender_LuckPerms_group%", LuckPermsData.getPrimaryGroup((ProxiedPlayer) sender)) 
 							.replace("%receiver_name%", receiver.getName())
 							.replace("%receiver_displayname%", receiver.getDisplayName())
 							.replace("%receiver_server%", receiver.getServer().getInfo().getName())
 							.replace("%receiver_server_motd%", receiver.getServer().getInfo().getMotd())
 							.replace("%receiver_customname%", UserConfig.getPlayer(receiver).getCustomname())
+							.replace("%receiver_BungeePerms_prefix%", BungeePermsData.getPrefix(receiver))
+							.replace("%receiver_BungeePerms_suffix%", BungeePermsData.getSuffix(receiver))
+							.replace("%receiver_BungeePerms_group%", BungeePermsData.getGroup(receiver))
+							.replace("%receiver_LuckPerms_prefix%", LuckPermsData.getPrefix(receiver))
+							.replace("%receiver_LuckPerms_suffix%", LuckPermsData.getSuffix(receiver)) 
+							.replace("%receiver_LuckPerms_group%", LuckPermsData.getPrimaryGroup(receiver)) 
 							.replaceAll("&", "§"));
 					sender.sendMessage(sended_message);
 					receiver.sendMessage(sended_message);

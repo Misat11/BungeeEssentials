@@ -11,6 +11,7 @@ import java.util.Map;
 import java.util.function.Consumer;
 
 import misat11.essentials.bungee.commands.MailCommand;
+import misat11.essentials.bungee.commands.MeCommand;
 import misat11.essentials.bungee.commands.MsgCommand;
 import misat11.essentials.bungee.commands.NickCommand;
 import misat11.essentials.bungee.commands.ServerShortcutCommand;
@@ -24,7 +25,7 @@ import net.md_5.bungee.config.ConfigurationProvider;
 import net.md_5.bungee.config.YamlConfiguration;
 
 public class BungeeEssentials extends Plugin {
-	public static String version = "0.0.6";
+	public static String version = "0.0.7";
 	public static boolean snapshot = true;
 	private static BungeeEssentials instance;
 	private static Configuration config;
@@ -70,6 +71,8 @@ public class BungeeEssentials extends Plugin {
 				config.set("leave-msg", "%customname% §cleaved from proxy.");
 			if (!config.contains("change-server-msg"))
 				config.set("change-server-msg", "%customname% §bchanged server to %after%§b.");
+			if (!config.contains("me-msg"))
+				config.set("me-msg", "§d* §f%customname% §dsays %chat%");
 			if (!config.contains("server-shortcuts"))
 				config.set("server-shortcuts", new ArrayList());
 			ConfigurationProvider.getProvider(YamlConfiguration.class).save(config,
@@ -88,6 +91,7 @@ public class BungeeEssentials extends Plugin {
 		getProxy().getPluginManager().registerCommand(this, new MsgCommand());
 		getProxy().getPluginManager().registerCommand(this, new NickCommand());
 		getProxy().getPluginManager().registerCommand(this, new MailCommand());
+		getProxy().getPluginManager().registerCommand(this, new MeCommand());
 
 		List list = config.getList("server-shortcuts");
 		if (list != null) {

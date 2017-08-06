@@ -1,10 +1,11 @@
-#BungeeEssentials config v0.0.6
+#BungeeEssentials config v0.0.7
 chat: "[%server%] %customname% >> %chat%"
 msg: "%sender_customname% >> %receiver_customname%: %chat%" 
 customnameprefix: "~"
 join-msg: "%customname%§a joined to proxy."
 leave-msg: "%customname% §cleaved from proxy."
 change-server-msg: "%customname% §bchanged server to %after%§b."
+me-msg: "§d* §f%customname% §dsays %chat%"
 server-shortcuts:
 - server: "lobby"
   command: "lobby"
