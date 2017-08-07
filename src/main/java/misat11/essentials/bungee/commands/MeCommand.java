@@ -1,9 +1,8 @@
 package misat11.essentials.bungee.commands;
 
-import misat11.essentials.bungee.BungeeEssentials;
-import misat11.essentials.bungee.UserConfig;
-import misat11.essentials.bungee.utils.BungeePermsData;
-import misat11.essentials.bungee.utils.LuckPermsData;
+import misat11.essentials.bungee.BungeeEssentials; 
+import misat11.essentials.bungee.utils.Placeholder;
+import misat11.essentials.bungee.utils.Placeholders;
 import net.md_5.bungee.api.CommandSender;
 import net.md_5.bungee.api.ProxyServer;
 import net.md_5.bungee.api.chat.BaseComponent;
@@ -22,20 +21,9 @@ public class MeCommand extends Command {
 		if (sender instanceof ProxiedPlayer) {
 			if (sender.hasPermission("essentials.me")) {
 				if (args.length >= 1) {
-					BaseComponent[] message = TextComponent.fromLegacyText(BungeeEssentials.getConfig()
-							.getString("me-msg").replace("%chat%", String.join(" ", args)).replace("%sender_name%", sender.getName())
-							.replace("%displayname%", ((ProxiedPlayer) sender).getDisplayName())
-							.replace("%server%", ((ProxiedPlayer) sender).getServer().getInfo().getName())
-							.replace("%server_motd%", ((ProxiedPlayer) sender).getServer().getInfo().getMotd())
-							.replace("%customname%",
-									UserConfig.getPlayer((ProxiedPlayer) sender).getCustomname())
-							.replace("%BungeePerms_prefix%", BungeePermsData.getPrefix((ProxiedPlayer) sender))
-							.replace("%BungeePerms_suffix%", BungeePermsData.getSuffix((ProxiedPlayer) sender))
-							.replace("%BungeePerms_group%", BungeePermsData.getGroup((ProxiedPlayer) sender))
-							.replace("%LuckPerms_prefix%", LuckPermsData.getPrefix((ProxiedPlayer) sender))
-							.replace("%LuckPerms_suffix%", LuckPermsData.getSuffix((ProxiedPlayer) sender)) 
-							.replace("%LuckPerms_group%", LuckPermsData.getPrimaryGroup((ProxiedPlayer) sender)) 
-							.replaceAll("&", "§"));
+					BaseComponent[] message = Placeholders.replace(BungeeEssentials.getConfig().getString("me-msg"),
+							new Placeholder("chat", String.join(" ", args)),
+							Placeholders.getPlayerPlaceholders((ProxiedPlayer) sender, null)); 
 					ProxyServer.getInstance().broadcast(message);
 				} else {
 					sender.sendMessage(new TextComponent("Wrong usage! Use /me <message>"));

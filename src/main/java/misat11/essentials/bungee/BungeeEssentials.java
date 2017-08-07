@@ -70,7 +70,7 @@ public class BungeeEssentials extends Plugin {
 			if (!config.contains("leave-msg"))
 				config.set("leave-msg", "%customname% §cleaved from proxy.");
 			if (!config.contains("change-server-msg"))
-				config.set("change-server-msg", "%customname% §bchanged server to %after%§b.");
+				config.set("change-server-msg", "%customname% §bchanged server to %server%§b.");
 			if (!config.contains("me-msg"))
 				config.set("me-msg", "§d* §f%customname% §dsays %chat%");
 			if (!config.contains("server-shortcuts"))

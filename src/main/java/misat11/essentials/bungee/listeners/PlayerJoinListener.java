@@ -7,6 +7,7 @@ import misat11.essentials.bungee.BungeeEssentials;
 import misat11.essentials.bungee.UserConfig;
 import misat11.essentials.bungee.utils.BungeePermsData;
 import misat11.essentials.bungee.utils.LuckPermsData;
+import misat11.essentials.bungee.utils.Placeholders;
 import net.md_5.bungee.api.ProxyServer;
 import net.md_5.bungee.api.chat.BaseComponent;
 import net.md_5.bungee.api.chat.TextComponent;
@@ -34,20 +35,9 @@ public class PlayerJoinListener implements Listener {
     public void onPostLogin(PostLoginEvent e) {  
     	UserConfig.registerPlayer(e.getPlayer()); 
     	
-		BaseComponent[] message = TextComponent.fromLegacyText(BungeeEssentials.getConfig().getString("join-msg") 
-				.replace("%name%", e.getPlayer().getName())
-				.replace("%displayname%", e.getPlayer().getDisplayName())
-				.replace("%customname%", UserConfig.getPlayer(e.getPlayer()).getCustomname()) 
-				.replace("%BungeePerms_prefix%", BungeePermsData.getPrefix(e.getPlayer()))
-				.replace("%BungeePerms_suffix%", BungeePermsData.getSuffix(e.getPlayer()))
-				.replace("%BungeePerms_group%", BungeePermsData.getGroup(e.getPlayer()))
-				.replace("%LuckPerms_prefix%", LuckPermsData.getPrefix(e.getPlayer()))
-				.replace("%LuckPerms_suffix%", LuckPermsData.getSuffix(e.getPlayer())) 
-				.replace("%LuckPerms_group%", LuckPermsData.getPrimaryGroup(e.getPlayer())) 
-				.replaceAll("&", "§")
-				);
-		ProxyServer.getInstance().broadcast(message);
-		
+    	BaseComponent[] message  = Placeholders.replace(BungeeEssentials.getConfig().getString("join-msg"), 
+    			Placeholders.getPlayerPlaceholders(e.getPlayer(), null)); 
+		ProxyServer.getInstance().broadcast(message); 
 		List mails = UserConfig.getPlayer(e.getPlayer()).getMails();
 		if(mails != null){
 			e.getPlayer().sendMessage(new TextComponent("You have mails. Please read it by §7/mail read §fand clear by §7/mail clear"));

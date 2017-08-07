@@ -12,11 +12,12 @@ import net.md_5.bungee.api.ProxyServer;
 import net.md_5.bungee.api.connection.ProxiedPlayer;
 
 public class LuckPermsData {
-	public static boolean isAvailible(){
+	public static boolean isAvailable(){
         return ProxyServer.getInstance().getPluginManager().getPlugin("LuckPerms") != null;
 	}
 	
 	private static LuckPermsApi getAPI() {
+		if(!isAvailable()) return null;
 		Optional<LuckPermsApi> provider = LuckPerms.getApiSafe();
 		if (provider.isPresent()) {
 			return provider.get();
@@ -24,9 +25,9 @@ public class LuckPermsData {
 		return null;
 	}
 
-	public static String getPrefix(ProxiedPlayer player) {
-		if(!isAvailible()) return "";
-		User user = getAPI().getUserSafe(player.getName()).orElse(null);
+	public static String getPrefix(String player) {
+		if(!isAvailable()) return "";
+		User user = getAPI().getUserSafe(player).orElse(null);
 		if (user == null) {
 		    return "";
 		}
@@ -41,9 +42,9 @@ public class LuckPermsData {
 		return metaData.getPrefix();
 	}
 
-	public static String getSuffix(ProxiedPlayer player) {
-		if(!isAvailible()) return "";
-		User user = getAPI().getUserSafe(player.getName()).orElse(null);
+	public static String getSuffix(String player) {
+		if(!isAvailable()) return "";
+		User user = getAPI().getUserSafe(player).orElse(null);
 		if (user == null) {
 		    return "";
 		}
@@ -58,9 +59,9 @@ public class LuckPermsData {
 		return metaData.getSuffix();
 	} 
 	 
-    public static String getPrimaryGroup(ProxiedPlayer player) {
-		if(!isAvailible()) return "";
-		User user = getAPI().getUserSafe(player.getName()).orElse(null);
+    public static String getPrimaryGroup(String player) {
+		if(!isAvailable()) return "";
+		User user = getAPI().getUserSafe(player).orElse(null);
 		if (user == null) {
 		    return "";
 		}

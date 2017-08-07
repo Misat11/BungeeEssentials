@@ -12,13 +12,13 @@ public class BungeePermsData {
         return ProxyServer.getInstance().getPluginManager().getPlugin("BungeePerms") != null;
     }
 
-    public static String getPrefix(ProxiedPlayer player) {
+    public static String getPrefix(String player) {
         if (isAvailable()) {
             BungeePerms bungeePerms = BungeePerms.getInstance();
             if (bungeePerms != null) {
                 PermissionsManager pm = bungeePerms.getPermissionsManager();
                 if (pm != null) {
-                    User user = pm.getUser(player.getName());
+                    User user = pm.getUser(player);
                     if (user != null) {
                         return user.buildPrefix();
                     }
@@ -28,13 +28,13 @@ public class BungeePermsData {
         return "";
     }
 
-    public static String getSuffix(ProxiedPlayer player) {
+    public static String getSuffix(String player) {
         if (isAvailable()) {
             BungeePerms bungeePerms = BungeePerms.getInstance();
             if (bungeePerms != null) {
                 PermissionsManager pm = bungeePerms.getPermissionsManager();
                 if (pm != null) {
-                    User user = pm.getUser(player.getName());
+                    User user = pm.getUser(player);
                     if (user != null) {
                         return user.buildSuffix();
                     }
@@ -44,13 +44,13 @@ public class BungeePermsData {
         return "";
     }
 
-    public static String getGroup(ProxiedPlayer player) {
+    public static String getGroup(String player) {
         if (isAvailable()) {
             BungeePerms bungeePerms = BungeePerms.getInstance();
             if (bungeePerms != null) {
                 PermissionsManager pm = bungeePerms.getPermissionsManager();
                 if (pm != null) {
-                    User user = pm.getUser(player.getName());
+                    User user = pm.getUser(player);
                     if (user != null) {
                         Group mainGroup = pm.getMainGroup(user);
                         if (mainGroup != null) {
