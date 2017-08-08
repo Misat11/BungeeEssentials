@@ -9,7 +9,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Consumer;
-
+ 
+import codecrafter47.bungeetablistplus.api.bungee.BungeeTabListPlusAPI;
 import misat11.essentials.Constants;
 import misat11.essentials.api.APlayerPlaceholderProcessor;
 import misat11.essentials.api.BungeeEssentialsApi;
@@ -22,6 +23,8 @@ import misat11.essentials.bungee.listeners.ChatListener;
 import misat11.essentials.bungee.listeners.PlayerJoinListener;
 import misat11.essentials.bungee.listeners.PlayerLeaveListener;
 import misat11.essentials.bungee.listeners.PlayerSwitchServerListener;
+import misat11.essentials.bungee.utils.BungeeTabListPlus.CustomNameVariable;
+import net.md_5.bungee.api.ProxyServer;
 import net.md_5.bungee.api.plugin.Plugin;
 import net.md_5.bungee.config.Configuration;
 import net.md_5.bungee.config.ConfigurationProvider;
@@ -137,6 +140,10 @@ public class BungeeEssentials extends Plugin implements BungeeEssentialsApi {
 					}
 				}
 			}
+		}
+		
+		if(ProxyServer.getInstance().getPluginManager().getPlugin("BungeeTabListPlus") != null){
+			BungeeTabListPlusAPI.registerVariable(this, new CustomNameVariable());
 		}
 	}
 
