@@ -10,6 +10,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.function.Consumer;
 
+import misat11.essentials.Constants;
+import misat11.essentials.api.APlayerPlaceholderProcessor;
+import misat11.essentials.api.BungeeEssentialsApi;
 import misat11.essentials.bungee.commands.MailCommand;
 import misat11.essentials.bungee.commands.MeCommand;
 import misat11.essentials.bungee.commands.MsgCommand;
@@ -24,13 +27,12 @@ import net.md_5.bungee.config.Configuration;
 import net.md_5.bungee.config.ConfigurationProvider;
 import net.md_5.bungee.config.YamlConfiguration;
 
-public class BungeeEssentials extends Plugin {
-	public static String version = "0.0.7";
-	public static boolean snapshot = true;
+public class BungeeEssentials extends Plugin implements BungeeEssentialsApi { 
 	private static BungeeEssentials instance;
 	private static Configuration config;
 	private HashMap<String, ServerShortcutCommand> registeredServerShortcuts = new HashMap<String, ServerShortcutCommand>();
-
+	private List<APlayerPlaceholderProcessor> player_placeholder_processors = new ArrayList<APlayerPlaceholderProcessor>();
+	
 	@Override
 	public void onEnable() {
 		if (Float.parseFloat(System.getProperty("java.class.version")) < 52.0) {
@@ -111,13 +113,13 @@ public class BungeeEssentials extends Plugin {
 		getLogger().info("§a* BungeeEssentials *");
 		getLogger().info("§a*    by Misat11    *");
 		getLogger().info("§a*                  *");
-		if (version.length() == 10) {
-			getLogger().info("§a*    V" + version + "   *");
+		if (Constants.version.length() == 10) {
+			getLogger().info("§a*    V" + Constants.version + "   *");
 		} else {
-			getLogger().info("§a*      V" + version + "      *");
+			getLogger().info("§a*      V" + Constants.version + "      *");
 		}
 		getLogger().info("§a*                  *");
-		if (snapshot == true) {
+		if (Constants.snapshot == true) {
 			getLogger().info("§a* SNAPSHOT VERSION *");
 		} else {
 			getLogger().info("§a*  STABLE VERSION  *");
@@ -152,6 +154,20 @@ public class BungeeEssentials extends Plugin {
 
 	public static Configuration getConfig() {
 		return config;
+	}
+
+	@Override
+	public String getCustomNick(String playername) {
+		return UserConfig.getPlayer(playername) != null ? UserConfig.getPlayer(playername).getCustomname() : playername;
+	}
+
+	@Override
+	public void regsterPlayerPlaceholderProcessor(APlayerPlaceholderProcessor processor) {
+		player_placeholder_processors.add(processor);
+	} 
+	
+	public List<APlayerPlaceholderProcessor> getPlayerPlaceholderProcessors(){
+		return player_placeholder_processors;
 	}
 
 }

@@ -3,6 +3,8 @@ package misat11.essentials.bungee.utils;
 import java.util.ArrayList;
 import java.util.List;
 
+import misat11.essentials.api.APlayerPlaceholderProcessor;
+import misat11.essentials.api.IPlaceholder;
 import misat11.essentials.bungee.BungeeEssentials;
 import misat11.essentials.bungee.UserConfig;
 import net.md_5.bungee.api.ProxyServer;
@@ -15,12 +17,15 @@ public class Placeholders {
 
 	public static BaseComponent[] replace(String basestring, Object... placeholders) {
 		for (Object p : placeholders) {
-			if (p instanceof Placeholder[]) {
-				for (Placeholder pl : (Placeholder[]) p) {
-					basestring = basestring.replaceAll("%" + pl.baseString() + "%", pl.replace());
+			if (p instanceof List) {
+				for (Object pl_obj : (List<Object>) p) {
+					if (pl_obj instanceof IPlaceholder) {
+						IPlaceholder pl = (IPlaceholder) pl_obj;
+						basestring = basestring.replaceAll("%" + pl.baseString() + "%", pl.replace());
+					}
 				}
-			} else if (p instanceof Placeholder) {
-				Placeholder pl = (Placeholder) p;
+			} else if (p instanceof IPlaceholder) {
+				IPlaceholder pl = (IPlaceholder) p;
 				basestring = basestring.replaceAll("%" + pl.baseString() + "%", pl.replace());
 			}
 		}
@@ -29,12 +34,12 @@ public class Placeholders {
 		return TextComponent.fromLegacyText(basestring);
 	}
 
-	public static Placeholder[] getPlayerPlaceholders(ProxiedPlayer player, String prefix) {
+	public static List<IPlaceholder> getPlayerPlaceholders(ProxiedPlayer player, String prefix) {
 		return getPlayerPlaceholders(player.getName(), prefix);
 	}
 
-	public static Placeholder[] getPlayerPlaceholders(String playername, String prefix) {
-		List<Placeholder> list = new ArrayList<Placeholder>();
+	public static List<IPlaceholder> getPlayerPlaceholders(String playername, String prefix) {
+		List<IPlaceholder> list = new ArrayList<IPlaceholder>();
 		if (prefix == null || prefix == "")
 			prefix = "";
 		else
@@ -69,15 +74,19 @@ public class Placeholders {
 		} else {
 			emptyPl(list, prefix + "LuckPerms_prefix", prefix + "LuckPerms_suffix", prefix + "LuckPerms_group");
 		}
+		
+		for(APlayerPlaceholderProcessor proc : BungeeEssentials.getInstance().getPlayerPlaceholderProcessors()){
+			proc.process(list, playername, prefix);
+		}
 
-		return list.toArray(new Placeholder[list.size()]);
+		return list;
 	}
 
-	private static void pl(List<Placeholder> list, String baseString, String replace) {
+	private static void pl(List<IPlaceholder> list, String baseString, String replace) {
 		list.add(new Placeholder(baseString, replace));
 	}
 
-	private static void emptyPl(List<Placeholder> list, String... empty) {
+	private static void emptyPl(List<IPlaceholder> list, String... empty) {
 		for (String e : empty) {
 			list.add(new Placeholder(e, "none"));
 		}

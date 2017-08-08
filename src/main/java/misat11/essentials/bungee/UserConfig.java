@@ -22,10 +22,12 @@ public class UserConfig {
 	private static HashMap<String, UserConfig> userConfigs = new HashMap<String, UserConfig>();
 
 	public static void registerPlayer(ProxiedPlayer player) {
+		if(BungeeEssentials.getInstance() == null) return;
 		registerPlayer(player.getName());
 	}
 
 	public static void registerPlayer(String username) {
+		if(BungeeEssentials.getInstance() == null) return;
 		if (!userConfigs.containsKey(username.toLowerCase())) {
 			UserConfig user = new UserConfig();
 			user.setName(username);
@@ -138,6 +140,7 @@ public class UserConfig {
 	}
 
 	public static UserConfig getPlayer(String username) {
+		if(BungeeEssentials.getInstance() == null) return null;
 		username = username.toLowerCase();
 		if (userConfigs.containsKey(username)) {
 			return userConfigs.get(username);
@@ -147,6 +150,7 @@ public class UserConfig {
 	}
 
 	public static UserConfig getPlayer(ProxiedPlayer player) {
+		if(BungeeEssentials.getInstance() == null) return null;
 		return getPlayer(player.getName());
 	}
 }

@@ -1,6 +1,8 @@
 package misat11.essentials.bungee.utils;
 
-public class Placeholder {
+import misat11.essentials.api.IPlaceholder;
+
+public class Placeholder implements IPlaceholder {
 	
 	private String base;
 	private String replace; 
