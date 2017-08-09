@@ -2,6 +2,7 @@ package misat11.essentials.bungee.utils;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import misat11.essentials.api.APlayerPlaceholderProcessor;
 import misat11.essentials.api.IPlaceholder;
@@ -29,6 +30,14 @@ public class Placeholders {
 				basestring = basestring.replaceAll("%" + pl.baseString() + "%", pl.replace());
 			}
 		}
+		List list = BungeeEssentials.getConfig().getList("regex");
+		if (list != null) {
+			for (Object entry : list) {
+				Map map = (Map) entry;
+				basestring = basestring.replaceAll(String.valueOf(map.get("search")), String.valueOf(map.get("replace")));
+			}
+		} 
+
 		basestring = basestring.replaceAll("\\&([0-9A-Za-z]+)", "§$1");
 
 		return TextComponent.fromLegacyText(basestring);
@@ -74,8 +83,8 @@ public class Placeholders {
 		} else {
 			emptyPl(list, prefix + "LuckPerms_prefix", prefix + "LuckPerms_suffix", prefix + "LuckPerms_group");
 		}
-		
-		for(APlayerPlaceholderProcessor proc : BungeeEssentials.getInstance().getPlayerPlaceholderProcessors()){
+
+		for (APlayerPlaceholderProcessor proc : BungeeEssentials.getInstance().getPlayerPlaceholderProcessors()) {
 			proc.process(list, playername, prefix);
 		}
 

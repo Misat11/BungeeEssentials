@@ -1,7 +1,9 @@
 package misat11.essentials.bungee.commands;
 
+import misat11.essentials.bungee.Bridge;
 import misat11.essentials.bungee.UserConfig;
 import net.md_5.bungee.api.CommandSender;
+import net.md_5.bungee.api.ProxyServer;
 import net.md_5.bungee.api.chat.TextComponent;
 import net.md_5.bungee.api.connection.ProxiedPlayer;
 import net.md_5.bungee.api.plugin.Command;
@@ -24,9 +26,11 @@ public class NickCommand extends Command {
 				if (args[0].equalsIgnoreCase("off")) {
 					config.setCustomname(null);
 					sender.sendMessage(new TextComponent("Your nick was reseted"));
+					Bridge.sendCustomName((ProxiedPlayer) sender);
 				} else {
 					config.setCustomname(args[0]);
 					sender.sendMessage(new TextComponent("Your nick was changed to " + args[0].replaceAll("&", "§")));
+					Bridge.sendCustomName((ProxiedPlayer) sender);
 				}
 			} else {
 				sender.sendMessage(new TextComponent("Cannot be used from console!"));
@@ -40,9 +44,16 @@ public class NickCommand extends Command {
 					if (args[1].equalsIgnoreCase("off")) {
 						config.setCustomname(null);
 						sender.sendMessage(new TextComponent("Custom nick of " + args[0] + " was reseted"));
+						if (ProxyServer.getInstance().getPlayer(args[0]) != null) {
+							Bridge.sendCustomName(ProxyServer.getInstance().getPlayer(args[0]));
+						}
 					} else {
 						config.setCustomname(args[1]);
-						sender.sendMessage(new TextComponent("Custom nick of " + args[0] + " was changed to " + args[1].replaceAll("&", "§")));
+						sender.sendMessage(new TextComponent(
+								"Custom nick of " + args[0] + " was changed to " + args[1].replaceAll("&", "§")));
+						if (ProxyServer.getInstance().getPlayer(args[0]) != null) {
+							Bridge.sendCustomName(ProxyServer.getInstance().getPlayer(args[0]));
+						}
 					}
 				} else {
 					sender.sendMessage(new TextComponent("Player is offline or not exists!"));

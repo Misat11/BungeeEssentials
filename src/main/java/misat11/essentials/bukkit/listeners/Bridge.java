@@ -3,6 +3,7 @@ package misat11.essentials.bukkit.listeners;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.messaging.PluginMessageListener;
 
+import com.earth2me.essentials.utils.FormatUtil;
 import com.google.common.io.ByteArrayDataInput;
 import com.google.common.io.ByteStreams;
 
@@ -21,10 +22,21 @@ public class Bridge implements PluginMessageListener {
 		if (subchannel.equals("CustomName")) {
 			String nick = in.readUTF();
 			if (!nick.equalsIgnoreCase(player.getName())) {
-				player.setDisplayName("~" + nick); 
+				player.setDisplayName("~" + nick.replaceAll("&", "§"));
 				if (BukkitPlugin.isOriginalEssentialsAvailable()) {
-					BukkitPlugin.getEssentials().getOfflineUser(player.getName()).setNickname(nick.replaceAll("&", "§"));
-				} 
+					BukkitPlugin.getEssentials().getOfflineUser(player.getName())
+							.setNickname(FormatUtil.replaceFormat(nick));
+					BukkitPlugin.getEssentials().getOfflineUser(player.getName()).setDisplayNick();
+				}
+			} else {
+				player.setDisplayName(player.getName());
+				if (BukkitPlugin.isOriginalEssentialsAvailable()) {
+					BukkitPlugin.getEssentials().getOfflineUser(player.getName());
+					if (BukkitPlugin.isOriginalEssentialsAvailable()) {
+						BukkitPlugin.getEssentials().getOfflineUser(player.getName()).setNickname(null);
+						BukkitPlugin.getEssentials().getOfflineUser(player.getName()).setDisplayNick();
+					}
+				}
 			}
 		}
 

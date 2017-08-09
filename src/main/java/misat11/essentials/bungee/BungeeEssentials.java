@@ -22,7 +22,8 @@ import misat11.essentials.bungee.listeners.ChatListener;
 import misat11.essentials.bungee.listeners.PlayerJoinListener;
 import misat11.essentials.bungee.listeners.PlayerLeaveListener;
 import misat11.essentials.bungee.listeners.PlayerSwitchServerListener;
-import misat11.essentials.bungee.utils.BungeeTabListPlus.CustomNameVariable; 
+import misat11.essentials.bungee.utils.BungeeTabListPlus.CustomNameVariable;
+import misat11.essentials.bungee.utils.GlobalTabList.CustomNamePlaceholder;
 import net.md_5.bungee.api.plugin.Plugin;
 import net.md_5.bungee.config.Configuration;
 import net.md_5.bungee.config.ConfigurationProvider;
@@ -78,6 +79,8 @@ public class BungeeEssentials extends Plugin implements BungeeEssentialsApi {
 				config.set("me-msg", "§d* §f%customname% §dsays %chat%");
 			if (!config.contains("server-shortcuts"))
 				config.set("server-shortcuts", new ArrayList());
+			if (!config.contains("regex"))
+				config.set("regex", new ArrayList());
 			ConfigurationProvider.getProvider(YamlConfiguration.class).save(config,
 					new File(getDataFolder(), "config.yml"));
 		} catch (IOException e) {
@@ -142,6 +145,10 @@ public class BungeeEssentials extends Plugin implements BungeeEssentialsApi {
 		
 		if(getProxy().getPluginManager().getPlugin("BungeeTabListPlus") != null){
 			CustomNameVariable.hookToBungeeTabListPlus(this);
+		}
+		
+		if(getProxy().getPluginManager().getPlugin("GlobalTablist") != null){
+			CustomNamePlaceholder.hookToGlobalTabList(this);
 		}
 	}
 

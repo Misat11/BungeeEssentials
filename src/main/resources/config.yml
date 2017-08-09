@@ -9,3 +9,145 @@ me-msg: "§d* §f%customname% §dsays %chat%"
 server-shortcuts:
 - server: "lobby"
   command: "lobby"
+regex:
+# make any pasted links clickable for convenience
+  - search: '(?<link>(?:(https?)://)?([-\w_\.]{2,}\.[a-z]{2,4})(/\S*)?)'
+    replace: "[url]${link}[/url]"
+# shows link target in tooltip for security reasons (only if link target differs from shown text)
+  - search: '(?i)\[(?:url|command)=(?<cmd>(?:(?:[^]\[]*)\[(?:[^]\[]*)\])*(?:[^]\[]*))\]'
+    replace: "[hover=&b${cmd}]$0"
+  - search: '(?i)\[/(?:url|command)\]'
+    replace: "$0[/hover]"
+# if players write commands in chat like ./command, make them clickable + remove the dot
+  - search: '(?i)^\.(?<cmd>/.{2,})'
+    replace: "[suggest]${cmd}[/suggest]"
+# some smileys
+  - search: '--->'
+    replace: "\u21DB"
+  - search: '<---'
+    replace: "\u21DA"
+  - search: '-->'
+    replace: "\u21D2"
+  - search: '<--'
+    replace: "\u21D0"
+  - search: '->'
+    replace: "\u2192"
+  - search: '<-'
+    replace: "\u2190"
+  - search: '(?i)\(C\)'
+    replace: "\u00A9"
+  - search: '(?i)\(R\)'
+    replace: "\u00AE"
+  - search: '\(o\)|\(O\)|\(time\)'
+    replace: "\u231A"
+  - search: '\(rain\)'
+    replace: "░"
+  - search: '\(sun\)'
+    replace: "☀"
+  - search: '\(cloud\)'
+    replace: "☁"
+  - search: '\(snow\)'
+    replace: "\u2638"
+  - search: '\(snowman\)'
+    replace: "☃"
+  - search: '\(\*\)|\(star\)'
+    replace: "\u2605"
+  - search: ':\)|:=\)|:-\)'
+    replace: "\u263A"
+  - search: ':\(|:=\(|:-\('
+    replace: "\u2639"
+  - search: '(?i):[-=]?D'
+    replace: "\u263B"
+  - search: '<3'
+    replace: "\u2764"
+  - search: '\(0\)'
+    replace: "⓪"
+  - search: '\(1\)'
+    replace: "①"
+  - search: '\(2\)'
+    replace: "②"
+  - search: '\(3\)'
+    replace: "③"
+  - search: '\(4\)'
+    replace: "④"
+  - search: '\(5\)'
+    replace: "⑤"
+  - search: '\(6\)'
+    replace: "⑥"
+  - search: '\(7\)'
+    replace: "⑦"
+  - search: '\(8\)'
+    replace: "⑧"
+  - search: '\(9\)'
+    replace: "⑨"
+  - search: '\(g\)'
+    replace: "ⓖ"
+  - search: '\(G\)'
+    replace: "Ⓖ"
+  - search: '\(at\)'
+    replace: "@"
+  - search: '\(tm\)'
+    replace: "™"
+  - search: '\(bullet\)'
+    replace: "•"
+  - search: '\(male\)'
+    replace: "♂"
+  - search: '\(female\)'
+    replace: "♀"
+  - search: '\(radiation\)'
+    replace: "☣"
+  - search: '\(correct\)'
+    replace: "✔"
+  - search: '\(wrong\)|\(incorrect\)'
+    replace: "✗"
+  - search: '\(pencil\)'
+    replace: "✎"
+  - search: '\(mail\)|\(letter\)'
+    replace: "✉"
+  - search: '\(peace\)'
+    replace: "✌"
+  - search: '\(illuminati\)'
+    replace: "◬"
+  - search: '\(club\)'
+    replace: "♣"
+  - search: '\(spades\)'
+    replace: "♠"
+  - search: '\(heart\)'
+    replace: "♥"
+  - search: '\(diams\)'
+    replace: "♦"
+  - search: '\(up\)'
+    replace: "↑"
+  - search: '\(down\)'
+    replace: "↓"
+  - search: '\(left\)'
+    replace: "←"
+  - search: '\(right\)'
+    replace: "→"
+  - search: '\(airplane\)|\(plane\)'
+    replace: "✈"
+  - search: '\(scissors\)'
+    replace: "✄"
+  - search: '\(circle\)'
+    replace: "◯"
+  - search: '\(coffee\)'
+    replace: "☕"
+  - search: '\(flower\)'
+    replace: "❁"
+  - search: '\(cube1\)'
+    replace: "⚀"
+  - search: '\(cube2\)'
+    replace: "⚁"
+  - search: '\(cube3\)'
+    replace: "⚂"
+  - search: '\(cube4\)'
+    replace: "⚃"
+  - search: '\(cube5\)'
+    replace: "⚄"
+  - search: '\(cube6\)'
+    replace: "⚅"
+# underline clickable things
+  - search: '(?i)(?=(\[(?:url|command|suggest)(?:=(?<cmd>(?:(?:[^]\[]*)\[(?:[^]\[]*)\])*(?:[^]\[]*)))?\]))'
+    replace: "[u]"
+  - search: '(?i)\[/(?:url|command|suggest)\]'
+    replace: "$0[/u]"

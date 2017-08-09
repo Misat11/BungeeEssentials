@@ -17,35 +17,35 @@ public class BukkitPlugin extends JavaPlugin {
 		instance = this;
 		getServer().getMessenger().registerOutgoingPluginChannel(this, Constants.channel_name);
 		getServer().getMessenger().registerIncomingPluginChannel(this, Constants.channel_name, new Bridge());
-		getLogger().info("§a********************");
-		getLogger().info("§a* BungeeEssentials *");
-		getLogger().info("§a*   BukkitBridge   *");
-		getLogger().info("§a*    by Misat11    *");
-		getLogger().info("§a*                  *");
+		getLogger().info("********************");
+		getLogger().info("* BungeeEssentials *");
+		getLogger().info("*   BukkitBridge   *");
+		getLogger().info("*    by Misat11    *");
+		getLogger().info("*                  *");
 		if (Constants.version.length() == 10) {
-			getLogger().info("§a*    V" + Constants.version + "   *");
+			getLogger().info("*    V" + Constants.version + "   *");
 		} else {
-			getLogger().info("§a*      V" + Constants.version + "      *");
+			getLogger().info("*      V" + Constants.version + "      *");
 		}
-		getLogger().info("§a*                  *");
+		getLogger().info("*                  *");
 		if (Constants.snapshot == true) {
-			getLogger().info("§a* SNAPSHOT VERSION *");
+			getLogger().info("* SNAPSHOT VERSION *");
 		} else {
-			getLogger().info("§a*  STABLE VERSION  *");
+			getLogger().info("*  STABLE VERSION  *");
 		}
 
 		if (isSpigot == false) {
-			getLogger().info("§a*                  *");
-			getLogger().info("§c*     WARNING:     *");
-			getLogger().info("§c* You aren't using *");
-			getLogger().info("§c*      Spigot      *");
-			getLogger().info("§c*                  *");
-			getLogger().info("§c* Please download! *");
-			getLogger().info("§c*   spigotmc.org   *");
+			getLogger().info("*                  *");
+			getLogger().info("*     WARNING:     *");
+			getLogger().info("* You aren't using *");
+			getLogger().info("*      Spigot      *");
+			getLogger().info("*                  *");
+			getLogger().info("* Please download! *");
+			getLogger().info("*   spigotmc.org   *");
 		}
 
-		getLogger().info("§a*                  *");
-		getLogger().info("§a********************");
+		getLogger().info("*                  *");
+		getLogger().info("********************");
 	}
 
 	public void onDisable() {
@@ -67,7 +67,7 @@ public class BukkitPlugin extends JavaPlugin {
 			return (IEssentials) instance.getServer().getPluginManager().getPlugin("Essentials");
 		return null;
 	}
-	
+
 	private boolean getIsSpigot() {
 		try {
 			Package spigotPackage = Package.getPackage("org.spigotmc");
