@@ -1,5 +1,6 @@
 package misat11.essentials.bungee.listeners;
 
+import misat11.essentials.bungee.Bridge;
 import misat11.essentials.bungee.BungeeEssentials;
 import misat11.essentials.bungee.UserConfig;
 import misat11.essentials.bungee.utils.BungeePermsData;
@@ -18,6 +19,7 @@ public class PlayerSwitchServerListener implements Listener {
     	BaseComponent[] message  = Placeholders.replace(BungeeEssentials.getConfig().getString("change-server-msg"), 
     			Placeholders.getPlayerPlaceholders(e.getPlayer(), null));  
 		ProxyServer.getInstance().broadcast(message);
+		Bridge.sendCustomName(e.getPlayer());
 	}
 
 }

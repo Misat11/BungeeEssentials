@@ -9,8 +9,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Consumer;
- 
-import codecrafter47.bungeetablistplus.api.bungee.BungeeTabListPlusAPI;
+  
 import misat11.essentials.Constants;
 import misat11.essentials.api.APlayerPlaceholderProcessor;
 import misat11.essentials.api.BungeeEssentialsApi;
@@ -23,8 +22,7 @@ import misat11.essentials.bungee.listeners.ChatListener;
 import misat11.essentials.bungee.listeners.PlayerJoinListener;
 import misat11.essentials.bungee.listeners.PlayerLeaveListener;
 import misat11.essentials.bungee.listeners.PlayerSwitchServerListener;
-import misat11.essentials.bungee.utils.BungeeTabListPlus.CustomNameVariable;
-import net.md_5.bungee.api.ProxyServer;
+import misat11.essentials.bungee.utils.BungeeTabListPlus.CustomNameVariable; 
 import net.md_5.bungee.api.plugin.Plugin;
 import net.md_5.bungee.config.Configuration;
 import net.md_5.bungee.config.ConfigurationProvider;
@@ -98,10 +96,10 @@ public class BungeeEssentials extends Plugin implements BungeeEssentialsApi {
 		getProxy().getPluginManager().registerCommand(this, new MailCommand());
 		getProxy().getPluginManager().registerCommand(this, new MeCommand());
 
-		List list = config.getList("server-shortcuts");
+		List<Map<String, String>> list = (List<Map<String, String>>) config.getList("server-shortcuts");
 		if (list != null) {
-			list.forEach(new Consumer<Map>() {
-				public void accept(Map t) {
+			list.forEach(new Consumer<Map<String, String>>() {
+				public void accept(Map<String, String> t) {
 					if (!registeredServerShortcuts.containsKey(t.get("command").toString())) {
 						ServerShortcutCommand command = new ServerShortcutCommand(t.get("command").toString(),
 								t.get("server").toString());
@@ -142,8 +140,8 @@ public class BungeeEssentials extends Plugin implements BungeeEssentialsApi {
 			}
 		}
 		
-		if(ProxyServer.getInstance().getPluginManager().getPlugin("BungeeTabListPlus") != null){
-			BungeeTabListPlusAPI.registerVariable(this, new CustomNameVariable());
+		if(getProxy().getPluginManager().getPlugin("BungeeTabListPlus") != null){
+			CustomNameVariable.hookToBungeeTabListPlus(this);
 		}
 	}
 

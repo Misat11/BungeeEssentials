@@ -21,10 +21,10 @@ public class Bridge implements PluginMessageListener {
 		if (subchannel.equals("CustomName")) {
 			String nick = in.readUTF();
 			if (!nick.equalsIgnoreCase(player.getName())) {
-				player.setDisplayName("~" + nick);
+				player.setDisplayName("~" + nick); 
 				if (BukkitPlugin.isOriginalEssentialsAvailable()) {
-					BukkitPlugin.getEssentials().getOfflineUser(player.getName()).setNickname(nick);
-				}
+					BukkitPlugin.getEssentials().getOfflineUser(player.getName()).setNickname(nick.replaceAll("&", "§"));
+				} 
 			}
 		}
 
