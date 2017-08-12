@@ -9,7 +9,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Consumer;
-  
+
 import misat11.essentials.Constants;
 import misat11.essentials.api.APlayerPlaceholderProcessor;
 import misat11.essentials.api.BungeeEssentialsApi;
@@ -22,6 +22,7 @@ import misat11.essentials.bungee.listeners.ChatListener;
 import misat11.essentials.bungee.listeners.PlayerJoinListener;
 import misat11.essentials.bungee.listeners.PlayerLeaveListener;
 import misat11.essentials.bungee.listeners.PlayerSwitchServerListener;
+import misat11.essentials.bungee.utils.Language;
 import misat11.essentials.bungee.utils.BungeeTabListPlus.CustomNameVariable;
 import misat11.essentials.bungee.utils.GlobalTabList.CustomNamePlaceholder;
 import net.md_5.bungee.api.plugin.Plugin;
@@ -29,12 +30,13 @@ import net.md_5.bungee.config.Configuration;
 import net.md_5.bungee.config.ConfigurationProvider;
 import net.md_5.bungee.config.YamlConfiguration;
 
-public class BungeeEssentials extends Plugin implements BungeeEssentialsApi { 
+public class BungeeEssentials extends Plugin implements BungeeEssentialsApi {
 	private static BungeeEssentials instance;
 	private static Configuration config;
 	private HashMap<String, ServerShortcutCommand> registeredServerShortcuts = new HashMap<String, ServerShortcutCommand>();
 	private List<APlayerPlaceholderProcessor> player_placeholder_processors = new ArrayList<APlayerPlaceholderProcessor>();
-	
+	private Language lang;
+
 	@Override
 	public void onEnable() {
 		if (Float.parseFloat(System.getProperty("java.class.version")) < 52.0) {
@@ -81,11 +83,15 @@ public class BungeeEssentials extends Plugin implements BungeeEssentialsApi {
 				config.set("server-shortcuts", new ArrayList());
 			if (!config.contains("regex"))
 				config.set("regex", new ArrayList());
+			if (!config.contains("lang"))
+				config.set("lang", "en"); 
 			ConfigurationProvider.getProvider(YamlConfiguration.class).save(config,
 					new File(getDataFolder(), "config.yml"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		
+		lang = Language.loadLanguage();
 
 		/* Listeners */
 		getProxy().getPluginManager().registerListener(this, new ChatListener());
@@ -142,12 +148,12 @@ public class BungeeEssentials extends Plugin implements BungeeEssentialsApi {
 				}
 			}
 		}
-		
-		if(getProxy().getPluginManager().getPlugin("BungeeTabListPlus") != null){
+
+		if (getProxy().getPluginManager().getPlugin("BungeeTabListPlus") != null) {
 			CustomNameVariable.hookToBungeeTabListPlus(this);
 		}
-		
-		if(getProxy().getPluginManager().getPlugin("GlobalTablist") != null){
+
+		if (getProxy().getPluginManager().getPlugin("GlobalTablist") != null) {
 			CustomNamePlaceholder.hookToGlobalTabList(this);
 		}
 	}
@@ -176,9 +182,9 @@ public class BungeeEssentials extends Plugin implements BungeeEssentialsApi {
 	@Override
 	public void regsterPlayerPlaceholderProcessor(APlayerPlaceholderProcessor processor) {
 		player_placeholder_processors.add(processor);
-	} 
-	
-	public List<APlayerPlaceholderProcessor> getPlayerPlaceholderProcessors(){
+	}
+
+	public List<APlayerPlaceholderProcessor> getPlayerPlaceholderProcessors() {
 		return player_placeholder_processors;
 	}
 

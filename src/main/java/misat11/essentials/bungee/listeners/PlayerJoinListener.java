@@ -6,6 +6,7 @@ import java.util.function.Consumer;
 import misat11.essentials.bungee.BungeeEssentials;
 import misat11.essentials.bungee.UserConfig;
 import misat11.essentials.bungee.utils.BungeePermsData;
+import misat11.essentials.bungee.utils.Language;
 import misat11.essentials.bungee.utils.LuckPermsData;
 import misat11.essentials.bungee.utils.Placeholders;
 import net.md_5.bungee.api.ProxyServer;
@@ -40,7 +41,7 @@ public class PlayerJoinListener implements Listener {
 		ProxyServer.getInstance().broadcast(message); 
 		List mails = UserConfig.getPlayer(e.getPlayer()).getMails();
 		if(mails != null){
-			e.getPlayer().sendMessage(new TextComponent("You have mails. Please read it by §7/mail read §fand clear by §7/mail clear"));
+			e.getPlayer().sendMessage(Placeholders.replace(Language.translate("mail.onconnect"))); 
 		}
     }
 }

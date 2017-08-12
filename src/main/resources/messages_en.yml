@@ -1,0 +1,39 @@
+lang_name: "English" 
+
+#Mails
+mail.nomails: "§cYou haven't any mail."
+mail.header: "§7---------- [§cMails§7] ----------"
+mail.clearinfo: "Use §7/mail clear§r for clear your mails"
+mail.email: "§7[§c%player%§7] §r%message%"
+mail.footer: "§7-----------------------------"
+mail.cleared: "§aYour mails were cleared!"
+mail.new: "§a§lYou have new mail. §aPlease read it by §7/mail read!"
+mail.sendedto: "§aYour email was sended to player §7%player%"
+mail.never_connected: "§cPlayer §7%player%§c is never connected to this server."
+mail.usage: "§cWrong usage! §rUse §7/mail [read|clear|send [to] [message]]"
+mail.onconnect: "§a§lYou have mails. §aPlease read it by §7/mail read §aand clear by §7/mail clear"
+
+#Me
+me.usage: "§cWrong usage! §rUse §7/me <message>"
+
+#Msg
+msg.playernotonline: "§cPlayer is not online."
+msg.usage: "§cWrong usage! §rUse §7/msg <player> <message>"
+
+#Nick
+nick.reseted: "§aYour nick was reseted"
+nick.chaged: "§aYour nick was changed to §7%nick%"
+nick.other.reseted: "§aCustom nick of §7%player%§a was reseted"
+nick.other.changed: "§aCustom nick of §7%player%§a was changed to §7%nick%"
+nick.other.notfound: "§cPlayer is never connected to this server!."
+nick.usage: "§cWrong usage! §rUse §7/nick <newnick>§r or §7/nick <player> <nick>"
+
+#Server Shortcuts
+ss.already: "§cYou are already on this server." 
+
+#NO PERMISSIONS
+nopermissions: "§cYou haven't permissions to do this."
+
+
+#CONSOLE CANNOT USE ERROR
+consoleuse: "§cCannot be used from console!"

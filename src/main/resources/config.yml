@@ -1,4 +1,5 @@
-#BungeeEssentials config v0.0.7
+#BungeeEssentials config v0.0.9
+lang: "en"
 chat: "[%server%] %customname% >> %chat%"
 msg: "%sender_customname% >> %receiver_customname%: %chat%" 
 customnameprefix: "~"

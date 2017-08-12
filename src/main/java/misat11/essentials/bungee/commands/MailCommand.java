@@ -1,13 +1,14 @@
 package misat11.essentials.bungee.commands;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.function.Consumer;
+import java.util.Map;
 
 import misat11.essentials.bungee.UserConfig;
+import misat11.essentials.bungee.utils.Language;
+import misat11.essentials.bungee.utils.Placeholder;
+import misat11.essentials.bungee.utils.Placeholders;
 import net.md_5.bungee.api.CommandSender;
-import net.md_5.bungee.api.ProxyServer;
-import net.md_5.bungee.api.chat.TextComponent;
+import net.md_5.bungee.api.ProxyServer; 
 import net.md_5.bungee.api.connection.ProxiedPlayer;
 import net.md_5.bungee.api.plugin.Command;
 
@@ -23,32 +24,35 @@ public class MailCommand extends Command {
 			if (sender.hasPermission("essentials.mail")) {
 				if (args.length == 1) {
 					if (args[0].equalsIgnoreCase("read")) {
-						List mails = UserConfig.getPlayer((ProxiedPlayer)sender).getMails();
-						if(mails == null){
-							sender.sendMessage(new TextComponent("You haven't any mail."));
+						List mails = UserConfig.getPlayer((ProxiedPlayer) sender).getMails();
+						if (mails == null) {
+							sender.sendMessage(Placeholders.replace(Language.translate("mail.nomails")));
 							return;
 						}
-						sender.sendMessage(new TextComponent("---------- [Mails] ----------"));
-						sender.sendMessage(new TextComponent("Use /mail clear for clear your mails"));
-						mails.forEach(new Consumer<HashMap>() {  
-							public void accept(HashMap t) { 
-								sender.sendMessage(new TextComponent("["+t.get("sender")+"] "+t.get("message").toString()
-								.replaceAll("&", "§")));
-							} 
-						});
-						sender.sendMessage(new TextComponent("-----------------------------"));
+						sender.sendMessage(Placeholders.replace(Language.translate("mail.header")));
+						sender.sendMessage(Placeholders.replace(Language.translate("mail.clearinfo")));
+						for (Object obj : mails) {
+							if (obj instanceof Map) {
+								Map t = (Map) obj;
+								sender.sendMessage(Placeholders.replace(Language.translate("mail.email"),
+										new Placeholder("player",
+												UserConfig.getPlayer(t.get("sender").toString()).getCustomname()),
+										new Placeholder("message", t.get("message").toString())));
+							}
+						}
+						sender.sendMessage(Placeholders.replace(Language.translate("mail.footer")));
 						return;
 					}
 					if (args[0].equalsIgnoreCase("clear")) {
 						UserConfig.getPlayer((ProxiedPlayer) sender).clearMails();
-						sender.sendMessage(new TextComponent("Your mails were cleared!"));
+						sender.sendMessage(Placeholders.replace(Language.translate("mail.cleared")));
 						return;
 					}
 				}
 				if (args.length >= 3) {
 					if (args[0].equalsIgnoreCase("send")) {
 						if (!sender.hasPermission("essentials.mail.send")) {
-							sender.sendMessage(new TextComponent("You haven't permissions to do this."));
+							sender.sendMessage(Placeholders.replace(Language.translate("nopermissions")));
 							return;
 						}
 						if (UserConfig.getPlayer(args[1]) != null) {
@@ -56,24 +60,25 @@ public class MailCommand extends Command {
 							UserConfig.getPlayer(args[1]).sendMail((ProxiedPlayer) sender, message);
 							ProxiedPlayer receiver = ProxyServer.getInstance().getPlayer(args[1]);
 							if (receiver != null) {
-								receiver.sendMessage(
-										new TextComponent("You have new mail. Please read it by /mail read!"));
+								receiver.sendMessage(Placeholders.replace(Language.translate("mail.new")));
 							}
-							sender.sendMessage(new TextComponent("Your email was sended to player " + args[1]));
-						} else {
 							sender.sendMessage(
-									new TextComponent("Player " + args[1] + " is never connected to this server."));
+									Placeholders.replace(Language.translate("mail.sendedto"), new Placeholder("player",
+											UserConfig.getPlayer(args[1]).getCustomname())));
+						} else {
+							sender.sendMessage(Placeholders.replace(Language.translate("mail.never_connected"),
+									new Placeholder("player", args[1])));
 						}
 						return;
 					}
 				}
 
-				sender.sendMessage(new TextComponent("Wrong usage! Use /mail [read|clear|send [to] [message]]"));
+				sender.sendMessage(Placeholders.replace(Language.translate("mail.usage")));
 			} else {
-				sender.sendMessage(new TextComponent("You haven't permissions!"));
+				sender.sendMessage(Placeholders.replace(Language.translate("nopermissions")));
 			}
 		} else {
-			sender.sendMessage(new TextComponent("Cannot be used from console!"));
+			sender.sendMessage(Placeholders.replace(Language.translate("consoleuse")));
 		}
 
 	}

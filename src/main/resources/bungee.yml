@@ -1,5 +1,5 @@
 name: BungeeEssentials
 main: misat11.essentials.bungee.BungeeEssentials
-version: 0.0.8
+version: 0.0.9
 author: Misat11
 softDepends: ['BungeeTabListPlus', 'BungeePerms', 'LuckPerms']

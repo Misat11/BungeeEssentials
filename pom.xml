@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>misat11.essentials.bungee</groupId>
 	<artifactId>BungeeEssentials</artifactId>
-	<version>0.0.8-SNAPSHOT</version>
+	<version>0.0.9-SNAPSHOT</version>
 
 	<build>
 		<plugins>
@@ -25,10 +25,11 @@
 			<id>spigot-repo</id>
 			<url>https://hub.spigotmc.org/nexus/content/repositories/snapshots/</url>
 		</repository>
+		<!-- 
 		<repository>
 			<id>bungeecord-repo</id>
 			<url>https://oss.sonatype.org/content/repositories/snapshots</url>
-		</repository>
+		</repository>-->
 		<repository>
 			<id>codecrafter47-repo</id>
 			<url>http://nexus.codecrafter47.dyndns.eu/content/groups/public/</url>
