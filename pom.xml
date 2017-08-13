@@ -23,17 +23,20 @@
 	<repositories>
 		<repository>
 			<id>spigot-repo</id>
-			<url>https://hub.spigotmc.org/nexus/content/repositories/snapshots/</url>
-		</repository>
-		<!-- 
+			<url>https://hub.spigotmc.org/nexus/content/groups/public/</url>
+		</repository> 
 		<repository>
 			<id>bungeecord-repo</id>
 			<url>https://oss.sonatype.org/content/repositories/snapshots</url>
-		</repository>-->
-		<repository>
-			<id>codecrafter47-repo</id>
-			<url>http://nexus.codecrafter47.dyndns.eu/content/groups/public/</url>
 		</repository>
+        <repository>
+            <id>bungeeperms-repo</id>
+            <url>http://repo.wea-ondara.net/repository/public/</url>
+        </repository>
+        <repository>
+            <id>codecrafter47-repo</id>
+            <url>http://nexus.codecrafter47.de/content/repositories/releases/</url>
+        </repository>
 		<repository>
 			<id>luck-repo</id>
 			<url>https://repo.lucko.me/</url>
@@ -55,12 +58,11 @@
 			<type>javadoc</type>
 			<scope>provided</scope>
 		</dependency>
-		<dependency>
-			<groupId>net.alpenblock</groupId>
-			<artifactId>BungeePerms</artifactId>
-			<version>3.0-alpha-1</version>
-			<scope>provided</scope>
-		</dependency>
+        <dependency>
+            <groupId>net.alpenblock</groupId>
+            <artifactId>BungeePerms</artifactId>
+            <version>3.0-dev-47</version>
+        </dependency>
 		<dependency>
 			<groupId>me.lucko.luckperms</groupId>
 			<artifactId>luckperms-api</artifactId>
@@ -83,6 +85,12 @@
 			<groupId>de.codecrafter47.globaltablist</groupId>
 			<artifactId>api</artifactId>
 			<version>1.11</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>net.ess3</groupId>
+			<artifactId>Essentials</artifactId>
+			<version>2.13.1</version>
 			<scope>provided</scope>
 		</dependency>
 	</dependencies>

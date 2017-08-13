@@ -1,35 +1,41 @@
 lang_name: "Čeština" 
 
 #Mails
-mail.nomails: "§cNemáš žádnou poštu."
-mail.header: "§7---------- [§cPošta§7] ----------"
-mail.clearinfo: "Použij §7/mail clear§r pro smazání pošty!"
-mail.email: "§7[§c%player%§7] §r%message%"
-mail.footer: "§7-----------------------------"
-mail.cleared: "§aTvoje pošta byla smazána!"
-mail.new: "§a§lMáš novou poštu. §aPřečti si ji pomocí §7/mail read!"
-mail.sendedto: "§aPošta byla odeslána hráči §7%player%"
-mail.never_connected: "§cHráč §7%player%§c nikdy nebyl na serveru."
-mail.usage: "§cŠpatné použití! §rPoužij §7/mail [read|clear|send [to] [message]]"
-mail.onconnect: "§a§lMáš nějakou poštu. §aPřečti si ji pomocí §7/mail read §aa smaž ji pomocí §7/mail clear"
+mail:
+  nomails: "§cNemáš žádnou poštu."
+  header: "§7---------- [§cPošta§7] ----------"
+  clearinfo: "Použij §7/mail clear§r pro smazání pošty!"
+  email: "§7[§c%player%§7] §r%message%"
+  footer: "§7-----------------------------"
+  cleared: "§aTvoje pošta byla smazána!"
+  new: "§a§lMáš novou poštu. §aPřečti si ji pomocí §7/mail read!"
+  sendedto: "§aPošta byla odeslána hráči §7%player%"
+  never_connected: "§cHráč §7%player%§c nikdy nebyl na serveru."
+  usage: "§cŠpatné použití! §rPoužij §7/mail [read|clear|send [to] [message]]"
+  onconnect: "§a§lMáš nějakou poštu. §aPřečti si ji pomocí §7/mail read §aa smaž ji pomocí §7/mail clear"
 
 #Me
-me.usage: "§cŠpatné použití! §rPoužij §7/me <zpráva>"
+me:
+  usage: "§cŠpatné použití! §rPoužij §7/me <zpráva>"
 
 #Msg
-msg.playernotonline: "§cHráč není online."
-msg.usage: "§cŠpatné použití! §rPoužij §7/msg <hráč> <zpráva>"
+msg:
+  playernotonline: "§cHráč není online."
+  usage: "§cŠpatné použití! §rPoužij §7/msg <hráč> <zpráva>"
 
 #Nick
-nick.reseted: "§aTvoje jméno bylo resetováno"
-nick.chaged: "§aTvoje jméno bylo změněno na §7%nick%"
-nick.other.reseted: "§aJméno hráče §7%player%§a bylo resetováno"
-nick.other.changed: "§aJméno hráče §7%player%§a bylo změněno na §7%nick%"
-nick.other.notfound: "§cHráč, kterého jsi zadal, tu nejspíš nikdy nebyl!"
-nick.usage: "§cŠpatné použití! §rPoužij §7/nick <nové jméno>§r nebo §7/nick <hráč> <jeho nové jméno>"
+nick:
+  reseted: "§aTvoje jméno bylo resetováno"
+  changed: "§aTvoje jméno bylo změněno na §7%nick%"
+  other:
+    reseted: "§aJméno hráče §7%player%§a bylo resetováno"
+    changed: "§aJméno hráče §7%player%§a bylo změněno na §7%nick%"
+    notfound: "§cHráč, kterého jsi zadal, tu nejspíš nikdy nebyl!"
+  usage: "§cŠpatné použití! §rPoužij §7/nick <nové jméno>§r nebo §7/nick <hráč> <jeho nové jméno>"
 
 #Server Shortcuts
-ss.already: "§cJiž jsi na tomto serveru." 
+ss:
+  already: "§cJiž jsi na tomto serveru." 
 
 #NO PERMISSIONS
 nopermissions: "§cNemáš oprávnění pro tuto činnost."
