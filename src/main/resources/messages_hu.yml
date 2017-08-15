@@ -1,0 +1,45 @@
+lang_name: "Hungarian" 
+
+#Mails
+mail:
+  nomails: "§cNincs e-mailje."
+  header: "§7---------- [§cE-mailek§7] ----------"
+  clearinfo: "Használat §7/mail clear§r a levelek törléséhez"
+  email: "§7[§c%player%§7] §r%message%"
+  footer: "§7-----------------------------"
+  cleared: "§aA leveleket törölték!"
+  new: "§a§lÚj levele van. §aKérjük, olvassa el §7/mail read!"
+  sendedto: "§aAz e-mailje §7%player% játékosnak szólt"
+  never_connected: "§7%player%§c Játékos soha nem csatlakozik ehhez a kiszolgálóhoz."
+  usage: "§cHelytelen használat! §rHasználat §7/mail [read|clear|send [kinek] [üzenet]]"
+  onconnect: "§a§lVan leveled. §aKérjük, olvassa el §7/mail read §aes törölje §7/mail clear"
+
+#Me
+me:
+  usage: "§cHelytelen használat! §rHasználat §7/me <üzenet>"
+
+#Msg
+msg:
+  playernotonline: "§cEz a játékos nem létezik."
+  usage: "§cHelytelen használat! §rHasználat §7/msg <játékos> <üzenet>"
+
+#Nick
+nick:
+  reseted: "§aA nicked vissza lett állítva"
+  changed: "§aA nicked megváltozott §7%nick%"
+  other:
+    reseted: "§aAz egyéni nick neve §7%player%§a vissza lett állítva"
+    changed: "§aAz egyéni nick neve §7%player%§a megváltozott §7%nick%"
+    notfound: "§cA lejátszó soha nem csatlakozik ehhez a kiszolgálóhoz!"
+  usage: "§cHelytelen használat! §rHasználat §7/nick <új nick>§r vagy §7/nick <játékos> <nick>"
+
+#Server Shortcuts
+ss:
+  already: "§cMár ezen a szerveren vagy." 
+
+#NO PERMISSIONS
+nopermissions: "§cNincs jogosultságod a használatára."
+
+
+#CONSOLE CANNOT USE ERROR
+consoleuse: "§cEzt a parancsot nem használhatod a consoleban!"
