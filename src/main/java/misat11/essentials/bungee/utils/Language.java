@@ -13,7 +13,7 @@ import net.md_5.bungee.config.YamlConfiguration;
 
 public class Language {
 
-	private static List<String> list = Arrays.asList("en", "cs");
+	private static List<String> list = Arrays.asList("en", "cs", "hu");
 	private static String base_langcode = "en";
 
 	private static Language instance;
