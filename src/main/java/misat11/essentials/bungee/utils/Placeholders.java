@@ -30,7 +30,7 @@ public class Placeholders {
 	public static BaseComponent[] replace(String basestring, Object... placeholders) {
 		for (Object p : placeholders) {
 			if (p instanceof List) {
-				for (Object pl_obj : (List<Object>) p) {
+				for (Object pl_obj : (List<?>) p) {
 					if (pl_obj instanceof IPlaceholder) {
 						IPlaceholder pl = (IPlaceholder) pl_obj;
 						basestring = basestring.replaceAll("%" + pl.baseString() + "%", pl.replace());
@@ -41,10 +41,10 @@ public class Placeholders {
 				basestring = basestring.replaceAll("%" + pl.baseString() + "%", pl.replace());
 			}
 		}
-		List list = BungeeEssentials.getConfig().getList("regex");
+		List<?> list = BungeeEssentials.getConfig().getList("regex");
 		if (list != null) {
 			for (Object entry : list) {
-				Map map = (Map) entry;
+				Map<?, ?> map = (Map<?, ?>) entry;
 				basestring = basestring.replaceAll(String.valueOf(map.get("search")),
 						String.valueOf(map.get("replace")));
 			}

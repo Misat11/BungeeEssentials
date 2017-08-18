@@ -4,8 +4,7 @@ import net.alpenblock.bungeeperms.BungeePerms;
 import net.alpenblock.bungeeperms.Group;
 import net.alpenblock.bungeeperms.PermissionsManager;
 import net.alpenblock.bungeeperms.User;
-import net.md_5.bungee.api.ProxyServer;
-import net.md_5.bungee.api.connection.ProxiedPlayer;
+import net.md_5.bungee.api.ProxyServer; 
 
 public class BungeePermsData {
 	public static boolean isAvailable() {

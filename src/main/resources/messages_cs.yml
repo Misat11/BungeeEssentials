@@ -36,6 +36,34 @@ nick:
 #Server Shortcuts
 ss:
   already: "§cJiž jsi na tomto serveru." 
+  
+#Mute
+mute:
+  usage: "§cŠpatné použití! §rPoužij §7/mute <hráčovo jméno> [čas]"  
+  notonline: "§c%player% není online."
+  mutedFor: "§6Hráč §7%player%§6 byl umlčena na §c%time%§6."
+  youMutedFor: "§6Byl jsi umlčen na §c%time%"
+  muted: "§6Hráč §c%player% §6byl umlčen."
+  youMuted: "§6Byl jsi umlčen!"
+  youUnmuted: "§6Nyní můžeš mluvit!"
+  unmuted: "§6Hráč §c%player%§6 nyní může mluvit."
+  muteExempt: "§cTohoto hráče nemůžeš umlčet."
+  voiceSilenced: "§6Byl jsi ztišen!"
+  canSpeak: "§6Od teď můžeš zase mluvit."
+  
+#Time
+year: "rok"
+years: "roky"
+month: "měsíc"
+months: "měsíců"
+day: "den"
+days: "dnů"
+hour: "hodina"
+hours: "hodin"
+minute: "minuta"
+minutes: "minut"
+second: "sekunda"
+seconds: "sekund"
 
 #NO PERMISSIONS
 nopermissions: "§cNemáš oprávnění pro tuto činnost."

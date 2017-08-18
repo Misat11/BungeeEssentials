@@ -20,8 +20,8 @@ public class Language {
 
 	public static Language loadLanguage() {
 		Configuration config = BungeeEssentials.getConfig();
-		String lang = BungeeEssentials.getConfig().getString("lang");
-		if (!list.contains(config.get("lang"))) {
+		String lang = config.getString("lang");
+		if (!list.contains(lang)) {
 			try {
 				config.set("lang", base_langcode);
 				ConfigurationProvider.getProvider(YamlConfiguration.class).save(config,
@@ -31,7 +31,7 @@ public class Language {
 			}
 		}
 		Language language = new Language();
-		language.langcode = config.getString("lang");
+		language.langcode = lang;
 		if (!language.langcode.equals(base_langcode)) {
 			InputStream in = BungeeEssentials.getInstance()
 					.getResourceAsStream("messages_" + base_langcode + ".yml");

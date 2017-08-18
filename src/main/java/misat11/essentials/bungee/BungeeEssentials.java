@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 import java.util.function.Consumer;
 
 import misat11.essentials.Constants;
@@ -16,6 +17,7 @@ import misat11.essentials.api.BungeeEssentialsApi;
 import misat11.essentials.bungee.commands.MailCommand;
 import misat11.essentials.bungee.commands.MeCommand;
 import misat11.essentials.bungee.commands.MsgCommand;
+import misat11.essentials.bungee.commands.MuteCommand;
 import misat11.essentials.bungee.commands.NickCommand;
 import misat11.essentials.bungee.commands.ServerShortcutCommand;
 import misat11.essentials.bungee.listeners.ChatListener;
@@ -104,6 +106,7 @@ public class BungeeEssentials extends Plugin implements BungeeEssentialsApi {
 		getProxy().getPluginManager().registerCommand(this, new NickCommand());
 		getProxy().getPluginManager().registerCommand(this, new MailCommand());
 		getProxy().getPluginManager().registerCommand(this, new MeCommand());
+		getProxy().getPluginManager().registerCommand(this, new MuteCommand());
 
 		List<Map<String, String>> list = (List<Map<String, String>>) config.getList("server-shortcuts");
 		if (list != null) {
@@ -156,6 +159,8 @@ public class BungeeEssentials extends Plugin implements BungeeEssentialsApi {
 		if (getProxy().getPluginManager().getPlugin("GlobalTablist") != null) {
 			CustomNamePlaceholder.hookToGlobalTabList(this);
 		}
+		
+		getProxy().getScheduler().schedule(this, new BungeeTimer(), 0, 30, TimeUnit.SECONDS);
 	}
 
 	@Override

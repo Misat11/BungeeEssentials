@@ -36,6 +36,34 @@ nick:
 #Server Shortcuts
 ss:
   already: "§cYou are already on this server." 
+  
+#Mute
+mute:
+  usage: "§cWrong usage! §rUse §7/mute <player name> [time]"  
+  notonline: "§c%player% not be online."
+  mutedFor: "§6Player §7%player%§6 muted for §c%time%§6."
+  youMutedFor: "§6You have been muted for §c%time%"
+  muted: "§6Player §c%player% §6muted."
+  youMuted: "§6You have been muted!"
+  youUnmuted: "§6You have been unmuted!"
+  unmuted: "§6Player §c%player%§6 unmuted."
+  muteExempt: "§cYou may not mute that player."
+  voiceSilenced: "§6Your voice has been silenced!"
+  canSpeak: "§6From now you can speak."
+  
+#Time
+year: "year"
+years: "years"
+month: "month"
+months: "months"
+day: "day"
+days: "days"
+hour: "hour"
+hours: "hours"
+minute: "minute"
+minutes: "minutes"
+second: "second"
+seconds: "seconds"
 
 #NO PERMISSIONS
 nopermissions: "§cYou haven't permissions to do this."
